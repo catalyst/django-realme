@@ -1,0 +1,9 @@
+*.pyc
+*~
+bundles/
+db.sqlite3
+
+# egg directory created by pip when installed in editable mode
+django_realme.egg-info
+/dist
+/build

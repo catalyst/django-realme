@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+  <soap:Header>
+    <Action xmlns="http://www.w3.org/2005/08/addressing">urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0:Issue:IssueToken:Fault:SOAPFaultException</Action>
+    <MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:dd91d2bb-9e42-4d8f-a039-9da05d3ca948</MessageID>
+    <To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To>
+    <RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:367c71e9-24c5-4415-b12d-127b4ed60ad8</RelatesTo>
+  </soap:Header>
+  <soap:Body>
+    <soap:Fault>
+      <soap:Code>
+        <soap:Value>soap:Sender</soap:Value>
+        <soap:Subcode>
+          <soap:Value xmlns:ns1="urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0">ns1:ExpiredToken</soap:Value>
+          <soap:Subcode>
+            <soap:Value xmlns:ns1="urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0">ns1:UserAuthentication</soap:Value>
+          </soap:Subcode>
+        </soap:Subcode>
+      </soap:Code>
+      <soap:Reason>
+        <soap:Text xml:lang="en-US">Authentication token period expired</soap:Text>
+      </soap:Reason>
+      <soap:Detail>
+        <ICMSFault xmlns="urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0"/>
+      </soap:Detail>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>

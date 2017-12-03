@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  {% if user.id %}
+  Hello, {{user}}, you have logged in via RealMe, <a href="{% url 'realme:logout' %}">logout</a>
+  {% else %}
+  <a href="{% url 'realme:login' %}">login via RealMe</a>
+  {% endif %}
+</body>
+</html>

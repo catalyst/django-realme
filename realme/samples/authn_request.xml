@@ -1,0 +1,17 @@
+<samlp:AuthnRequest
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    ID="ONELOGIN_8982cab2cfc3e3f615ba23c9100a307db63e95d9"
+    Version="2.0"
+    IssueInstant="2016-09-15T22:05:53Z"
+    Destination="https://www.ite.logon.realme.govt.nz/sso/logon/metaAlias/logon/logonidp"
+    ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+    AssertionConsumerServiceURL="https://testing.bundle.services.govt.nz/sp/acs/">
+    <saml:Issuer>https://bundle.services.govt.nz/sp/testing</saml:Issuer>
+    <samlp:NameIDPolicy
+        Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+        AllowCreate="true" />
+    <samlp:RequestedAuthnContext Comparison="exact">
+        <saml:AuthnContextClassRef>urn:nzl:govt:ict:stds:authn:deployment:GLS:SAML:2.0:ac:classes:LowStrength</saml:AuthnContextClassRef>
+    </samlp:RequestedAuthnContext>
+</samlp:AuthnRequest>

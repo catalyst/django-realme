@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RealMe - login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'realme/fakeme.css' %}" />
+</head>
+<body class="login fluid">
+  <div class="page">
+    <div role="main" class="role_main">
+
+      <!-- Tooltips/messages  -->
+      <div style="display:block" class="tooltip backToAgency add_bottom">
+        <a class="linkStopDoubleClick" title="Go back to the agency" href="/">Go back to Home</a>
+      </div>
+
+      <div class="bg-repeat">
+        <form action="" method="post" id="logon">
+          {% csrf_token %}
+
+          <div class="module">
+            <div class="wrapper">
+
+              <h1 id="realme"><a></a></h1>
+
+              <!-- USERNAME -->
+              <div class="inner-login">
+
+                {{ form.non_field_errors }}
+
+                <div class="control-group">
+
+                  <div class="control-group "><label class="control-label big" for="logon:username:input" id="logon:username:label">Username</label>
+
+                    <div class="controls">
+                      {{ form.username.errors }}
+                      <input type="text" tabindex="1" maxlength="64" aria-describedby="usernameHelp" class="full_width get_focus valid" autocomplete="off" name="username" id="id_username">
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="control-group "><label class="control-label big" for="logon:userPassword:input">Password</label>
+
+                  <div class="controls">
+                  {{ form.password.errors }}
+                  <input type="password" class="full_width " tabindex="2" maxlength="72" value="" autocomplete="off" name="password" id="id_password">
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Submit -->
+              <input type="submit" class="btn btn-primary" tabindex="5" value="Login" name="logon:logon" id="logon:logon">
+            </div>
+          </div>
+        </form>
+
+        <div class="create module ">
+          <div class="wrapper">
+            <h2 class="border">Create a RealMe login</h2>
+            <h5>To access this service you need a RealMe login.</h5>
+            <p>This will give you access to a range of services with a single username and password, and much more. You only need one RealMe login and it's designed to protect your privacy and security.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </form>
+</body>
+</html>

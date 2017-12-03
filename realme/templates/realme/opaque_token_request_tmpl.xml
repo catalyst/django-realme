@@ -1,0 +1,66 @@
+<soap:Envelope {% for ns, link in NAMESPACES.items %}xmlns:{{ns}}="{{link}}" {% endfor %}>
+    <soap:Header>
+        <wsa:Action wsu:Id="Id-Action">http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue</wsa:Action>
+        <wsa:MessageID wsu:Id="Id-MessageID">urn:uuid:{{message_id}}</wsa:MessageID>
+        <wsa:To wsu:Id="Id-To">{{to}}</wsa:To>
+        <wsa:ReplyTo wsu:Id="Id-ReplyTo">
+            <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+        </wsa:ReplyTo>
+        <wsse:Security soap:mustUnderstand="1">
+
+            <wsu:Timestamp wsu:Id="Id-Timestamp">
+                <wsu:Created>{{created}}</wsu:Created>
+                <wsu:Expires>{{expires}}</wsu:Expires>
+            </wsu:Timestamp>
+
+            <ds:Signature>
+                <ds:SignedInfo>
+                    <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+                    <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+{% for ref_id in REF_IDS %}
+                    <ds:Reference URI="#{{ref_id}}">
+                        <ds:Transforms>
+                            <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
+                                <ec:InclusiveNamespaces PrefixList="soap" />
+                            </ds:Transform>
+                        </ds:Transforms>
+                        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+                        <ds:DigestValue/>
+                    </ds:Reference>
+{% endfor %}
+                </ds:SignedInfo>
+                <ds:SignatureValue/>
+                <ds:KeyInfo Id="Id-KeyInfo">
+                    <wsse:SecurityTokenReference Id="Id-SecurityTokenReference">
+                        <wsse:KeyIdentifier EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#ThumbprintSHA1">{{key_identifier}}</wsse:KeyIdentifier>
+                    </wsse:SecurityTokenReference>
+                </ds:KeyInfo>
+            </ds:Signature>
+
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body wsu:Id="Id-Body">
+        <wst:RequestSecurityToken xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" Context="Testing">
+            <wst:RequestType>http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue</wst:RequestType>
+            <wsp:AppliesTo xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+                <wsa:EndpointReference xmlns:wsa="http://www.w3.org/2005/08/addressing">
+                    <wsa:Address>{{target_sp_entity_id}}</wsa:Address>
+                </wsa:EndpointReference>
+            </wsp:AppliesTo>
+            <wst:Claims xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" Dialect="urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0">
+                <iCMS:Consent xmlns:iCMS="urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0">urn:oasis:names:tc:SAML:2.0:consent:current-explicit</iCMS:Consent>
+                <iCMS:TokenSubType xmlns:iCMS="urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0">urn:nzl:govt:ict:stds:authn:deployment:igovt:gls:iCMS:1_0:SAMLV2.0:Seamless</iCMS:TokenSubType>
+            </wst:Claims>
+            <wst:TokenType>http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0</wst:TokenType>
+
+            <wst:Lifetime>
+                <wsu:Created>{{created}}</wsu:Created>
+                <wsu:Expires>{{expires}}</wsu:Expires>
+            </wst:Lifetime>
+
+            <wst14:ActAs xmlns="http://docs.oasis-open.org/ws-sx/ws-trust/200802">
+{{logon_attributes_token|safe}}
+            </wst14:ActAs>
+        </wst:RequestSecurityToken>
+    </soap:Body>
+</soap:Envelope>
