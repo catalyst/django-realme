@@ -2,6 +2,7 @@ import os
 from os.path import abspath, dirname, join
 from setuptools import find_packages, setup
 
+
 HERE = abspath(dirname(__file__))
 os.chdir(HERE)  # allow setup.py to be run from any path
 
@@ -13,13 +14,14 @@ with open(join(HERE, 'requirements.txt')) as requirements:
 
 setup(
     name='django-realme',
-    version='1.0',
+    version='1.0.1',
     packages=find_packages(exclude=('samples', 'example')),
     include_package_data=True,
     description='A Django app client for the RealMe service',
     long_description=README,
-    url='',
-    author='Catalyst IT',
+    long_description_content_type='text/markdown',
+    url='https://github.com/ServiceInnovationLab/django-realme',
+    author='Service Innovation Lab',
     author_email='',
     license='GPL',
     classifiers=[
